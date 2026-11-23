@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ExamNexus Admin Dashboard — Manage users, view analytics, and download reports.">
+    <title>Admin Dashboard | ExamNexus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <span class="loader-text">ExamNexus</span>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN DASHBOARD ===== -->
+    <div class="admin-dashboard" id="adminDashboard">
+
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-brand">
+                <a href="index.html" class="sidebar-logo">
+                    <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Exam</span>
+                        <span class="logo-secondary">Nexus</span>
+                    </div>
+                </a>
+                <span class="admin-badge">ADMIN</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="sidebar-link active" data-section="overview" id="navOverview">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Overview</span>
+                </button>
+                <button class="sidebar-link" data-section="users" id="navUsers">
+                    <i class="fas fa-users"></i>
+                    <span>All Users</span>
+                </button>
+                <button class="sidebar-link" data-section="branches" id="navBranches">
+                    <i class="fas fa-code-branch"></i>
+                    <span>By Branch</span>
+                </button>
+                <button class="sidebar-link" data-section="activity" id="navActivity">
+                    <i class="fas fa-clock"></i>
+                    <span>Recent Activity</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="sidebar-logout-btn" id="adminLogoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+
+            <!-- Top Bar -->
+            <header class="admin-topbar">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="topbar-title">
+                    <h1 id="pageTitle">Dashboard Overview</h1>
+                    <p id="pageSubtitle">Welcome back, Admin</p>
+                </div>
+                <div class="topbar-right">
+                    <div class="topbar-date" id="currentDate"></div>
+                    <div class="admin-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ===== OVERVIEW SECTION ===== -->
+            <section class="admin-section active" id="sectionOverview">
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card stat-card-users">
+                        <div class="stat-card-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="statTotalUsers">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                        <div class="stat-card-trend up">
+                            <i class="fas fa-arrow-up"></i> Active
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-students">
+                        <div class="stat-card-icon"><i class="fas fa-user-graduate"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="statTotalStudents">0</h3>
+                            <p>Students</p>
+                        </div>
+                        <div class="stat-card-trend up">
+                            <i class="fas fa-arrow-up"></i> Enrolled
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-faculty">
+                        <div class="stat-card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="statTotalFaculty">0</h3>
+                            <p>Faculty</p>
+                        </div>
+                        <div class="stat-card-trend up">
+                            <i class="fas fa-check"></i> Verified
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-uploads">
+                        <div class="stat-card-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="statTotalUploads">0</h3>
+                            <p>Total Uploads</p>
+                        </div>
+                        <div class="stat-card-trend up">
+                            <i class="fas fa-arrow-up"></i> Growing
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-bookmarks">
+                        <div class="stat-card-icon"><i class="fas fa-bookmark"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="statTotalBookmarks">0</h3>
+                            <p>Total Bookmarks</p>
+                        </div>
+                        <div class="stat-card-trend up">
+                            <i class="fas fa-heart"></i> Saved
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-branches">
+                        <div class="stat-card-icon"><i class="fas fa-code-branch"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="statBranchCount">6</h3>
+                            <p>Branches</p>
+                        </div>
+                        <div class="stat-card-trend up">
+                            <i class="fas fa-check-circle"></i> Active
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch Distribution Chart -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="fas fa-chart-bar"></i> Users by Branch</h3>
+                    </div>
+                    <div class="branch-chart" id="branchChart"></div>
+                </div>
+
+                <!-- Recent Users -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="fas fa-user-clock"></i> Recently Joined Users</h3>
+                        <button class="btn btn-outline btn-sm" onclick="switchSection('users')">
+                            View All <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Branch</th>
+                                    <th>Joined</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentUsersTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== ALL USERS SECTION ===== -->
+            <section class="admin-section" id="sectionUsers">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="fas fa-users"></i> All Registered Users</h3>
+                        <div class="header-actions">
+                            <div class="search-input-wrapper">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="userSearchInput" placeholder="Search users..." class="admin-search-input">
+                            </div>
+                            <button class="btn btn-primary btn-sm" id="downloadAllUsersBtn">
+                                <i class="fas fa-download"></i> Download CSV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Branch</th>
+                                    <th>Semester</th>
+                                    <th>Uploads</th>
+                                    <th>Bookmarks</th>
+                                    <th>Joined</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allUsersTable"></tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer" id="allUsersFooter"></div>
+                </div>
+            </section>
+
+            <!-- ===== BY BRANCH SECTION ===== -->
+            <section class="admin-section" id="sectionBranches">
+                <div class="branch-tabs" id="branchTabs"></div>
+                <div class="admin-card" id="branchCard">
+                    <div class="admin-card-header">
+                        <h3 id="branchCardTitle"><i class="fas fa-code-branch"></i> Select a Branch</h3>
+                        <button class="btn btn-primary btn-sm" id="downloadBranchBtn" style="display: none;">
+                            <i class="fas fa-download"></i> Download CSV
+                        </button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Student Name</th>
+                                    <th>Email</th>
+                                    <th>Semester</th>
+                                    <th>Uploads</th>
+                                    <th>Bookmarks</th>
+                                    <th>Joined</th>
+                                </tr>
+                            </thead>
+                            <tbody id="branchUsersTable"></tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer" id="branchUsersFooter"></div>
+                </div>
+            </section>
+
+            <!-- ===== ACTIVITY SECTION ===== -->
+            <section class="admin-section" id="sectionActivity">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="fas fa-clock"></i> Recent Activity Feed</h3>
+                    </div>
+                    <div class="activity-feed" id="activityFeed"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

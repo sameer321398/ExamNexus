@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your ExamNexus Profile — View saved resources, uploads, and account settings.">
+    <title>My Profile | ExamNexus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <span class="loader-text">ExamNexus</span>
+        </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-primary">Exam</span>
+                    <span class="logo-secondary">Nexus</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link" data-page="index"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="branches.html" class="nav-link" data-page="branches"><i class="fas fa-code-branch"></i> Branches</a></li>
+                <li><a href="pyqs.html" class="nav-link" data-page="pyqs"><i class="fas fa-file-alt"></i> PYQs</a></li>
+                <li><a href="resources.html" class="nav-link" data-page="resources"><i class="fas fa-book"></i> Resources</a></li>
+                <li><a href="about.html" class="nav-link" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="search-btn" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div id="navAuthArea"></div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search PYQs, Notes, Lab Files..." autocomplete="off">
+                <button class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="page-header-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="page-header-content">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>My Profile</span>
+                </div>
+                <h1 class="page-title">My <span class="gradient-text">Profile</span></h1>
+                <p class="page-subtitle">Manage your account, view saved resources, and access your uploaded content.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROFILE SECTION ===== -->
+    <section class="profile-section" id="profileSection">
+        <div class="container">
+            <div class="profile-layout">
+                <!-- Left: User Info Card -->
+                <div class="profile-sidebar">
+                    <div class="profile-card">
+                        <div class="profile-avatar" id="profileAvatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h2 class="profile-name" id="profileName">User Name</h2>
+                        <span class="profile-role-badge" id="profileRoleBadge">Student</span>
+                        <div class="profile-info-list">
+                            <div class="profile-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span id="profileEmail">user@example.com</span>
+                            </div>
+                            <div class="profile-info-item">
+                                <i class="fas fa-code-branch"></i>
+                                <span id="profileBranch">BCA</span>
+                            </div>
+                            <div class="profile-info-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span id="profileJoined">Joined Feb 2026</span>
+                            </div>
+                        </div>
+                        <div class="profile-stats-grid">
+                            <div class="profile-stat">
+                                <span class="profile-stat-number" id="savedCount">0</span>
+                                <span class="profile-stat-label">Saved</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="profile-stat-number" id="uploadCount">0</span>
+                                <span class="profile-stat-label">Uploads</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="profile-stat-number" id="downloadCount">0</span>
+                                <span class="profile-stat-label">Downloads</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline btn-full" id="editProfileBtn" style="margin-top: 16px;">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                        <button class="btn btn-text btn-full" id="logoutBtn" style="margin-top: 8px; color: #ec4899;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Tabs Content -->
+                <div class="profile-content">
+                    <!-- Profile Tabs -->
+                    <div class="profile-tabs">
+                        <button class="profile-tab active" data-tab="saved" id="tabSaved">
+                            <i class="fas fa-bookmark"></i> Saved Items
+                        </button>
+                        <button class="profile-tab" data-tab="uploads" id="tabUploads">
+                            <i class="fas fa-cloud-upload-alt"></i> My Uploads
+                        </button>
+                        <button class="profile-tab" data-tab="settings" id="tabSettings">
+                            <i class="fas fa-cog"></i> Settings
+                        </button>
+                    </div>
+
+                    <!-- Saved Items Tab -->
+                    <div class="profile-tab-content active" id="savedContent">
+                        <div class="profile-content-header">
+                            <h3><i class="fas fa-bookmark"></i> Saved Resources</h3>
+                            <p>Your bookmarked PYQs, Notes, and Lab Files</p>
+                        </div>
+                        <div class="saved-filter-bar">
+                            <button class="saved-filter-btn active" data-filter="all">All</button>
+                            <button class="saved-filter-btn" data-filter="pyq">PYQs</button>
+                            <button class="saved-filter-btn" data-filter="notes">Notes</button>
+                            <button class="saved-filter-btn" data-filter="labfiles">Lab Files</button>
+                        </div>
+                        <div class="saved-items-grid" id="savedItemsGrid">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+
+                    <!-- Uploads Tab -->
+                    <div class="profile-tab-content" id="uploadsContent">
+                        <div class="profile-content-header">
+                            <h3><i class="fas fa-cloud-upload-alt"></i> My Uploads</h3>
+                            <p>Resources you've shared with the community</p>
+                        </div>
+                        <button class="btn btn-primary" id="openUploadModal" style="margin-bottom: 24px;">
+                            <i class="fas fa-plus"></i> Upload New Resource
+                        </button>
+                        <div class="uploads-grid" id="uploadsGrid">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="profile-tab-content" id="settingsContent">
+                        <div class="profile-content-header">
+                            <h3><i class="fas fa-cog"></i> Account Settings</h3>
+                            <p>Update your personal information</p>
+                        </div>
+                        <form id="settingsForm" class="settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="settingName">Full Name</label>
+                                    <input type="text" id="settingName" placeholder="Your full name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingEmail">Email Address</label>
+                                    <input type="email" id="settingEmail" placeholder="your@email.com" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="settingBranch">Branch</label>
+                                    <select id="settingBranch">
+                                        <option value="">Select Branch</option>
+                                        <option value="btechcse">B.Tech CSE</option>
+                                        <option value="bca">BCA</option>
+                                        <option value="bcom">B.Com</option>
+                                        <option value="mba">MBA</option>
+                                        <option value="btechece">B.Tech ECE</option>
+                                        <option value="bba">BBA</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingSemester">Current Semester</label>
+                                    <select id="settingSemester">
+                                        <option value="">Select Semester</option>
+                                        <option value="1">Semester 1</option>
+                                        <option value="2">Semester 2</option>
+                                        <option value="3">Semester 3</option>
+                                        <option value="4">Semester 4</option>
+                                        <option value="5">Semester 5</option>
+                                        <option value="6">Semester 6</option>
+                                        <option value="7">Semester 7</option>
+                                        <option value="8">Semester 8</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="settingBio">About / Bio</label>
+                                <textarea id="settingBio" placeholder="Tell us about yourself..." rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
+
+                        <div class="settings-danger-zone">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Danger Zone</h4>
+                            <p>Permanently delete your account and all associated data.</p>
+                            <button class="btn btn-outline" style="border-color: #ec4899; color: #ec4899;" id="deleteAccountBtn">
+                                <i class="fas fa-trash-alt"></i> Delete Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== UPLOAD MODAL ===== -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal" style="max-width: 640px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-cloud-upload-alt" style="color: var(--accent-1); margin-right: 8px;"></i> Upload Resource</h3>
+                <button class="modal-close" id="closeUploadModal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="uploadType"><i class="fas fa-tag"></i> Resource Type</label>
+                        <select id="uploadType" required>
+                            <option value="">Select Type</option>
+                            <option value="notes">Notes</option>
+                            <option value="pyq">Previous Year Question (PYQ)</option>
+                            <option value="labfiles">Lab File</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="uploadBranch"><i class="fas fa-code-branch"></i> Branch</label>
+                            <select id="uploadBranch" required>
+                                <option value="">Select Branch</option>
+                                <option value="btechcse">B.Tech CSE</option>
+                                <option value="bca">BCA</option>
+                                <option value="bcom">B.Com</option>
+                                <option value="mba">MBA</option>
+                                <option value="btechece">B.Tech ECE</option>
+                                <option value="bba">BBA</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="uploadSemester"><i class="fas fa-layer-group"></i> Semester</label>
+                            <select id="uploadSemester" required>
+                                <option value="">Select Semester</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uploadSubject"><i class="fas fa-book"></i> Subject Name</label>
+                        <select id="uploadSubject" required>
+                            <option value="">Select Subject</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="uploadYearGroup" style="display: none;">
+                        <label for="uploadYear"><i class="fas fa-calendar"></i> Year</label>
+                        <select id="uploadYear">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uploadDescription"><i class="fas fa-align-left"></i> Description</label>
+                        <textarea id="uploadDescription" placeholder="Brief description of this resource..." rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uploadPages"><i class="fas fa-file"></i> Total Pages</label>
+                        <input type="number" id="uploadPages" placeholder="e.g. 12" min="1" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-file-upload"></i> Upload File</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <div class="file-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <p class="file-upload-text">Drag & drop your file here or <span>browse</span></p>
+                            <p class="file-upload-hint">PDF, DOC, DOCX, PPT, PPTX, ZIP (Max 50MB)</p>
+                            <input type="file" id="uploadFile" accept=".pdf,.doc,.docx,.ppt,.pptx,.zip,.jpg,.jpeg,.png" hidden>
+                            <div class="file-upload-preview" id="filePreview" style="display: none;">
+                                <i class="fas fa-file"></i>
+                                <span id="fileName">file.pdf</span>
+                                <button type="button" class="file-remove" id="fileRemove"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="uploadStatus" class="form-status"></div>
+
+                    <button type="submit" class="btn btn-primary btn-full" id="uploadSubmitBtn">
+                        <i class="fas fa-upload"></i> Upload Resource
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== EDIT PROFILE MODAL ===== -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-edit" style="color: var(--accent-1); margin-right: 8px;"></i> Edit Profile</h3>
+                <button class="modal-close" id="closeEditProfile"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label for="editName">Full Name</label>
+                        <input type="text" id="editName" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editBranch">Branch</label>
+                        <select id="editBranch">
+                            <option value="">Select Branch</option>
+                            <option value="btechcse">B.Tech CSE</option>
+                            <option value="bca">BCA</option>
+                            <option value="bcom">B.Com</option>
+                            <option value="mba">MBA</option>
+                            <option value="btechece">B.Tech ECE</option>
+                            <option value="bba">BBA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editBio">Bio</label>
+                        <textarea id="editBio" placeholder="Tell us about yourself..." rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-primary">Exam</span>
+                            <span class="logo-secondary">Nexus</span>
+                        </div>
+                    </a>
+                    <p>Your ultimate academic companion for PYQs, Notes, and Lab Files. Access free study resources across all branches and semesters.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="branches.html">Branches</a></li>
+                        <li><a href="pyqs.html">PYQs</a></li>
+                        <li><a href="resources.html">Notes & Lab Files</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Branches</h4>
+                    <ul>
+                        <li><a href="pyqs.html?branch=btechcse">B.Tech CSE</a></li>
+                        <li><a href="pyqs.html?branch=bca">BCA</a></li>
+                        <li><a href="pyqs.html?branch=bcom">B.Com</a></li>
+                        <li><a href="pyqs.html?branch=mba">MBA</a></li>
+                        <li><a href="pyqs.html?branch=btechece">B.Tech ECE</a></li>
+                        <li><a href="pyqs.html?branch=bba">BBA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html#faq">FAQ</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ExamNexus. All rights reserved.</p>
+                <p>Made with <i class="fas fa-heart" style="color: #F43F5E;"></i> for Students</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

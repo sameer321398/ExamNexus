@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to ExamNexus — Access your saved PYQs, Notes, and Lab Files.">
+    <title>Login | ExamNexus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    
+    <!-- EmailJS for sending real OTP emails -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Replaced 'YOUR_PUBLIC_KEY' with actual EmailJS public key
+            emailjs.init("aftciosVwKhVwoqbC");
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <span class="loader-text">ExamNexus</span>
+        </div>
+    </div>
+
+    <!-- ===== AUTH PAGE ===== -->
+    <div class="auth-page">
+        <!-- Animated Background -->
+        <div class="auth-bg">
+            <!-- Floating gradient orbs -->
+            <div class="auth-orb auth-orb-1"></div>
+            <div class="auth-orb auth-orb-2"></div>
+            <div class="auth-orb auth-orb-3"></div>
+            <div class="auth-orb auth-orb-4"></div>
+            <div class="auth-orb auth-orb-5"></div>
+
+            <!-- Animated mesh grid -->
+            <div class="auth-mesh"></div>
+
+            <!-- Floating particles -->
+            <div class="auth-particles">
+                <div class="particle p1"></div>
+                <div class="particle p2"></div>
+                <div class="particle p3"></div>
+                <div class="particle p4"></div>
+                <div class="particle p5"></div>
+                <div class="particle p6"></div>
+                <div class="particle p7"></div>
+                <div class="particle p8"></div>
+                <div class="particle p9"></div>
+                <div class="particle p10"></div>
+                <div class="particle p11"></div>
+                <div class="particle p12"></div>
+            </div>
+
+            <!-- Animated rings -->
+            <div class="auth-ring auth-ring-1"></div>
+            <div class="auth-ring auth-ring-2"></div>
+        </div>
+
+        <div class="auth-container">
+            <!-- Left Side - Branding -->
+            <div class="auth-branding">
+                <a href="index.html" class="auth-logo">
+                    <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Exam</span>
+                        <span class="logo-secondary">Nexus</span>
+                    </div>
+                </a>
+                <h1 class="auth-brand-title">Welcome Back<span class="gradient-text">.</span></h1>
+                <p class="auth-brand-desc">Access your saved resources, bookmarks, and uploaded content. Continue your academic journey.</p>
+                <div class="auth-features">
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon"><i class="fas fa-bookmark"></i></div>
+                        <div>
+                            <h4>Save Resources</h4>
+                            <p>Bookmark PYQs, notes, and lab files</p>
+                        </div>
+                    </div>
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <div>
+                            <h4>Upload Content</h4>
+                            <p>Share your study materials with peers</p>
+                        </div>
+                    </div>
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon"><i class="fas fa-user-shield"></i></div>
+                        <div>
+                            <h4>Secure Access</h4>
+                            <p>Your data is safe and private</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust indicators -->
+                <div class="auth-trust">
+                    <div class="auth-trust-item">
+                        <i class="fas fa-users"></i>
+                        <span>10,000+ Students</span>
+                    </div>
+                    <div class="auth-trust-item">
+                        <i class="fas fa-star"></i>
+                        <span>4.9 Rating</span>
+                    </div>
+                    <div class="auth-trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Form -->
+            <div class="auth-form-wrapper">
+                <div class="auth-form-card">
+                    <!-- Decorative corner accents -->
+                    <div class="card-accent card-accent-tl"></div>
+                    <div class="card-accent card-accent-br"></div>
+
+                    <div id="mainLoginSection">
+                        <div class="auth-form-header">
+                            <div class="auth-form-icon">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </div>
+                            <h2>Sign In</h2>
+                            <p>Enter your credentials to access your account</p>
+                        </div>
+
+                        <form id="loginForm" class="auth-form">
+                            <div class="form-group">
+                                <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="loginEmail" placeholder="you@example.com" required autocomplete="email">
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                                    <button type="button" class="password-toggle" id="toggleLoginPass" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="rememberMe">
+                                    <span class="custom-checkbox"><i class="fas fa-check"></i></span>
+                                    Remember me
+                                </label>
+                                <a href="#" class="forgot-link" id="forgotPassLink">Forgot password?</a>
+                            </div>
+
+                            <div id="loginStatus" class="form-status"></div>
+
+                            <button type="submit" class="btn btn-primary btn-full btn-glow" id="loginSubmit">
+                                <i class="fas fa-sign-in-alt"></i> Sign In
+                                <div class="btn-shine"></div>
+                            </button>
+                        </form>
+
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <div class="social-auth">
+                            <button class="social-auth-btn" onclick="showToast('Google login coming soon!', 'info')">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                            <button class="social-auth-btn" onclick="showToast('GitHub login coming soon!', 'info')">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </button>
+                        </div>
+
+                        <div class="auth-switch">
+                            <p>Don't have an account? <a href="signup.html">Create Account <i class="fas fa-arrow-right"></i></a></p>
+                        </div>
+                    </div>
+
+                    <div id="otpSection" style="display: none;">
+                        <div class="auth-form-header">
+                            <div class="auth-form-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h2>Verify It's You</h2>
+                            <p>We've sent a 6-digit verification code to <strong id="verifyEmailText">your email</strong>.</p>
+                        </div>
+                        
+                        <form id="otpForm" class="auth-form">
+                            <div class="form-group">
+                                <label for="otpCode"><i class="fas fa-key"></i> Verification Code</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="otpCode" placeholder="------" maxlength="6" pattern="\d{6}" required autocomplete="one-time-code" style="letter-spacing: 6px; font-weight: 800; text-align: center; font-size: 1.4rem;">
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
+                            
+                            <div id="otpStatus" class="form-status"></div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full btn-glow" id="otpSubmit">
+                                <i class="fas fa-check-circle"></i> Verify & Continue
+                                <div class="btn-shine"></div>
+                            </button>
+                            <button type="button" class="btn btn-outline btn-full" id="backToAuthBtn" style="margin-top: 16px; justify-content: center;">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="forgotPasswordSection" style="display: none;">
+                        <div class="auth-form-header">
+                            <div class="auth-form-icon">
+                                <i class="fas fa-unlock-alt"></i>
+                            </div>
+                            <h2>Reset Password</h2>
+                            <p>Enter your email address and we'll send you a code to reset your password.</p>
+                        </div>
+                        
+                        <form id="forgotPasswordForm" class="auth-form">
+                            <div class="form-group">
+                                <label for="forgotEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="forgotEmail" placeholder="you@example.com" required autocomplete="email">
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
+                            
+                            <div id="forgotStatus" class="form-status"></div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full btn-glow" id="forgotSubmit">
+                                <i class="fas fa-paper-plane"></i> Send Reset Code
+                                <div class="btn-shine"></div>
+                            </button>
+                            <button type="button" class="btn btn-outline btn-full" id="backToLoginFromForgot" style="margin-top: 16px; justify-content: center;">
+                                <i class="fas fa-arrow-left"></i> Back to Login
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="resetPasswordSection" style="display: none;">
+                        <div class="auth-form-header">
+                            <div class="auth-form-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <h2>Create New Password</h2>
+                            <p>Your code was verified! Please enter your new secure password below.</p>
+                        </div>
+                        
+                        <form id="resetPasswordForm" class="auth-form">
+                            <div class="form-group">
+                                <label for="newPassword"><i class="fas fa-lock"></i> New Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="newPassword" placeholder="Min 6 characters" required minlength="6" autocomplete="new-password">
+                                    <button type="button" class="password-toggle" id="toggleNewPass" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmNewPassword"><i class="fas fa-lock"></i> Confirm New Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="confirmNewPassword" placeholder="Confirm password" required minlength="6" autocomplete="new-password">
+                                    <button type="button" class="password-toggle" id="toggleConfirmNewPass" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
+
+                            <div id="resetStatus" class="form-status"></div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full btn-glow" id="resetSubmit">
+                                <i class="fas fa-save"></i> Save New Password
+                                <div class="btn-shine"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

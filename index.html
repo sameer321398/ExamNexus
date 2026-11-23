@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ExamNexus – Your one-stop destination for Previous Year Questions, Notes, and Lab Files for BCA, BBA, B.Com, and B.Tech programs.">
+    <meta name="keywords" content="University, PYQ, Notes, Lab Files, BCA, BBA, B.Com, B.Tech, Academic Resources">
+    <title>ExamNexus | PYQs, Notes & Lab Files</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body class="landing-page">
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <span class="loader-text">ExamNexus</span>
+        </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-primary">Exam</span>
+                    <span class="logo-secondary">Nexus</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link active" data-page="index"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="branches.html" class="nav-link" data-page="branches"><i class="fas fa-code-branch"></i> Branches</a></li>
+                <li><a href="pyqs.html" class="nav-link" data-page="pyqs"><i class="fas fa-file-alt"></i> PYQs</a></li>
+                <li><a href="resources.html" class="nav-link" data-page="resources"><i class="fas fa-book"></i> Resources</a></li>
+                <li><a href="about.html" class="nav-link" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="search-btn" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div id="navAuthArea"></div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search PYQs, Notes, Lab Files..." autocomplete="off">
+                <button class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+                <div class="shape shape-6"></div>
+            </div>
+            <div class="hero-grid-bg"></div>
+        </div>
+        <div class="hero-wrapper">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Trusted by 10,000+ Students</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line gradient-text">ExamNexus</span>
+                </h1>
+                <p class="hero-subtitle">Your ultimate academic companion — Access Previous Year Questions, comprehensive Notes, and Lab Files across all branches and semesters.</p>
+                <div class="hero-cta">
+                    <a href="pyqs.html" class="btn btn-primary">
+                        <i class="fas fa-file-alt"></i> Explore PYQs
+                    </a>
+                    <a href="branches.html" class="btn btn-outline">
+                        <i class="fas fa-arrow-right"></i> Browse Branches
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="5000">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">PYQs</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="2500">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">Notes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="800">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">Lab Files</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="6">0</span><span class="stat-plus" style="visibility: hidden;">+</span>
+                        <span class="stat-label">Branches</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual" id="heroVisual">
+                <div class="hero-3d-scene">
+                    <div class="hero-spotlight"></div>
+                    <div class="hero-light-ring"></div>
+                    <div class="hero-card-stack">
+                        <div class="stack-card sc-1">
+                            <div class="sc-shimmer"></div>
+                            <div class="sc-icon sc-pyq"><i class="fas fa-scroll"></i></div>
+                            <div class="sc-body">
+                                <h4>Data Structures using C</h4>
+                                <p>BCA &bull; Semester 2 &bull; 2025</p>
+                            </div>
+                            <span class="sc-tag">Popular</span>
+                        </div>
+                        <div class="stack-card sc-2">
+                            <div class="sc-shimmer"></div>
+                            <div class="sc-icon sc-notes"><i class="fas fa-book-open"></i></div>
+                            <div class="sc-body">
+                                <h4>Marketing Management</h4>
+                                <p>BBA &bull; Semester 4 &bull; Notes</p>
+                            </div>
+                            <span class="sc-tag sc-tag-green">48 Pages</span>
+                        </div>
+                        <div class="stack-card sc-3">
+                            <div class="sc-shimmer"></div>
+                            <div class="sc-icon sc-lab"><i class="fas fa-flask"></i></div>
+                            <div class="sc-body">
+                                <h4>Java Programming Lab</h4>
+                                <p>B.Tech &bull; Semester 3 &bull; Lab File</p>
+                            </div>
+                            <span class="sc-tag sc-tag-blue">New</span>
+                        </div>
+                        <div class="stack-card sc-4">
+                            <div class="sc-shimmer"></div>
+                            <div class="sc-icon sc-bcom"><i class="fas fa-calculator"></i></div>
+                            <div class="sc-body">
+                                <h4>Financial Accounting</h4>
+                                <p>B.Com &bull; Semester 2 &bull; PYQ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-bolt"></i> Why Choose Us</span>
+                <h2 class="section-title">Everything You Need to <span class="gradient-text">Ace Your Exams</span></h2>
+                <p class="section-desc">We bring all academic resources under one roof, curated and organized for your success.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon pyq-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <h3>Previous Year Questions</h3>
+                    <p>Access a vast collection of PYQs organized by branch, semester, and subject. Our primary focus to help you prepare effectively.</p>
+                    <div class="feature-link-wrapper">
+                        <a href="pyqs.html" class="feature-link">Browse PYQs <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon notes-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Comprehensive Notes</h3>
+                    <p>Well-structured, easy-to-understand notes covering the entire syllabus — handwritten and digital both available.</p>
+                    <div class="feature-link-wrapper">
+                        <a href="resources.html" class="feature-link">View Notes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon lab-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Lab Files & Practicals</h3>
+                    <p>Complete lab files with well-documented experiments, code samples, and viva questions for practical exams.</p>
+                    <div class="feature-link-wrapper">
+                        <a href="resources.html" class="feature-link">Get Lab Files <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon branch-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>6+ Branches Covered</h3>
+                    <p>We provide exclusive resources tailored to strictly follow university-defined courses across 6+ branches.</p>
+                    <div class="feature-link-wrapper">
+                        <a href="branches.html" class="feature-link">Explore Branches <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA BANNER ===== -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Ace Your Exams?</h2>
+                <p>Browse thousands of PYQs, notes, and lab files — all free, all organized, all for you.</p>
+                <div class="cta-buttons">
+                    <a href="pyqs.html" class="btn btn-primary"><i class="fas fa-file-alt"></i> Browse PYQs</a>
+                    <a href="branches.html" class="btn btn-outline"><i class="fas fa-code-branch"></i> Select Branch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-primary">Exam</span>
+                            <span class="logo-secondary">Nexus</span>
+                        </div>
+                    </a>
+                    <p>Your ultimate academic companion for PYQs, Notes, and Lab Files. Access free study resources across all branches and semesters.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="branches.html">Branches</a></li>
+                        <li><a href="pyqs.html">PYQs</a></li>
+                        <li><a href="resources.html">Notes & Lab Files</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Branches</h4>
+                    <ul>
+                        <li><a href="pyqs.html?branch=btechcse">B.Tech CSE</a></li>
+                        <li><a href="pyqs.html?branch=bca">BCA</a></li>
+                        <li><a href="pyqs.html?branch=bcom">B.Com</a></li>
+                        <li><a href="pyqs.html?branch=mba">MBA</a></li>
+                        <li><a href="pyqs.html?branch=btechece">B.Tech ECE</a></li>
+                        <li><a href="pyqs.html?branch=bba">BBA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html#faq">FAQ</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ExamNexus. All rights reserved.</p>
+                <p>Made with <i class="fas fa-heart" style="color: #F43F5E;"></i> for Students</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
+
+
+
+
+
+

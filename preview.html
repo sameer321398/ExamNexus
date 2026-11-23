@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Viewer | ExamNexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: #e5e7eb; display: flex; flex-direction: column; height: 100vh; }
+        .viewer-header { background: #1f2937; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .viewer-header h1 { font-size: 1.2rem; margin: 0; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+        .viewer-actions { display: flex; gap: 10px; }
+        .btn { padding: 8px 16px; border-radius: 6px; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        .viewer-body { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding: 30px; overflow-y: auto; position: relative; }
+        .mock-pdf { background: white; width: 100%; max-width: 800px; min-height: 1000px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); padding: 50px; border-radius: 4px; box-sizing: border-box; position: relative; z-index: 1;}
+        .mock-header { text-align: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px; margin-bottom: 30px; }
+        .mock-title { font-size: 1.8rem; color: #111827; margin-bottom: 10px; }
+        .mock-subtitle { font-size: 1.1rem; color: #6b7280; }
+        .mock-content { line-height: 1.8; color: #374151; }
+        .skeleton-line { height: 12px; background: #e5e7eb; border-radius: 4px; margin-bottom: 15px; }
+        .skeleton-line.short { width: 70%; }
+        .skeleton-line.medium { width: 85%; }
+        .question-block { margin-top: 30px; }
+        .question { display: flex; gap: 15px; margin-bottom: 25px; }
+        .q-num { font-weight: bold; width: 30px; }
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 8rem; color: rgba(0,0,0,0.04); font-weight: 800; pointer-events: none; user-select: none; z-index: 0;}
+    </style>
+</head>
+<body>
+    <div class="viewer-header">
+        <h1 id="docTitle"><i class="fas fa-file-pdf"></i> Document Viewer</h1>
+        <div class="viewer-actions">
+            <button class="btn btn-outline" onclick="window.close()"><i class="fas fa-times"></i> Close</button>
+            <button class="btn btn-primary" id="downloadBtn"><i class="fas fa-download"></i> Download PDF</button>
+        </div>
+    </div>
+    <div class="viewer-body">
+        <div class="watermark">ExamNexus</div>
+        <div class="mock-pdf">
+            <div class="mock-header">
+                <h2 class="mock-title" id="pageDocTitle">Loading...</h2>
+                <p class="mock-subtitle" id="pageDocSubtitle">Document Preview</p>
+            </div>
+            <div class="mock-content" id="mockContent">
+                <!-- Generating mock questions -->
+            </div>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('file') || 'Document';
+        const type = urlParams.get('type') || 'pyq';
+        
+        document.getElementById('docTitle').innerHTML = '<i class="fas fa-file-pdf"></i> ' + fileName + ' — Preview';
+        document.getElementById('pageDocTitle').innerText = fileName;
+        
+        // Try to get data from localStorage
+        const previewData = JSON.parse(localStorage.getItem('en_preview_data') || '{}');
+        const mockContent = document.getElementById('mockContent');
+        const subTitle = document.getElementById('pageDocSubtitle');
+
+        let contentHtml = '';
+        
+        if (previewData.description) {
+            contentHtml += `<div style="background:#f8fafc; padding:20px; border-radius:10px; margin-bottom:30px; border-left:4px solid #3b82f6;">`;
+            contentHtml += `<h4 style="margin-top:0; color:#1e293b;">Contributor's Note:</h4>`;
+            contentHtml += `<p style="margin-bottom:0; font-style:italic;">${previewData.description}</p>`;
+            contentHtml += `</div>`;
+        }
+
+        // Check if an actual file (like an image) was uploaded
+        if (previewData.fileData && previewData.fileData.startsWith('data:image/')) {
+            contentHtml += `<div style="text-align:center; margin-top:20px;">`;
+            contentHtml += `<p style="color:#64748b; font-size:0.9rem; margin-bottom:15px;"><i class="fas fa-image"></i> Image Preview (${previewData.fileName})</p>`;
+            contentHtml += `<img src="${previewData.fileData}" style="max-width:100%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); border:1px solid #e2e8f0;" alt="Uploaded Resource">`;
+            contentHtml += `</div>`;
+        } else if (type === 'pyq') {
+            subTitle.innerText = 'University Examination Paper Preview';
+            const questions = previewData.questions || [
+                "Explain the core concepts and architecture related to this subject.",
+                "Compare and contrast the different methodologies used in modern implementations.",
+                "Draw a neat diagram and explain the internal working mechanism.",
+                "Solve the following numerical problem based on recent university patterns.",
+                "Discuss the future scope and recent advancements in this field."
+            ];
+
+            contentHtml += '<h3>Section A (Objective Type)</h3>';
+            questions.slice(0, 3).forEach((q, i) => {
+                contentHtml += `<div class="question"><div class="q-num">Q${i+1}.</div><div style="width: 100%;"><p style="margin:0 0 10px 0; font-weight: 500;">${q}</p><div class="skeleton-line"></div><div class="skeleton-line medium"></div></div></div>`;
+            });
+
+            contentHtml += '<h3>Section B (Descriptive Type)</h3>';
+            questions.slice(3).forEach((q, i) => {
+                contentHtml += `<div class="question"><div class="q-num">Q${i+4}.</div><div style="width: 100%;"><p style="margin:0 0 10px 0; font-weight: 500;">${q}</p><div class="skeleton-line short"></div><div class="skeleton-line medium"></div><div class="skeleton-line"></div></div></div>`;
+            });
+        } else {
+            subTitle.innerText = type === 'labfiles' || type === 'lab' ? 'Lab Manual / Practical Guide' : 'Study Material / Notes Preview';
+            const topics = previewData.topics || [
+                "Fundamental principles and theoretical background.",
+                "Detailed analysis of key algorithms and structures.",
+                "Case studies and real-world application scenarios.",
+                "Comprehensive summary of the entire syllabus."
+            ];
+
+            topics.forEach((topic, i) => {
+                contentHtml += `<h3>${i+1}. ${topic}</h3>`;
+                contentHtml += `<div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><br>`;
+            });
+            
+            contentHtml += '<h3>Summary</h3>';
+            contentHtml += `<div class="skeleton-line"></div><div class="skeleton-line medium"></div><br>`;
+        }
+        
+        mockContent.innerHTML = contentHtml;
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            // Record download if Auth is available
+            if (window.opener && window.opener.Auth) {
+                window.opener.Auth.recordDownload();
+            }
+
+            if (previewData && previewData.fileData) {
+                // If it's a stored file (Base64), download the actual file
+                const a = document.createElement('a');
+                a.href = previewData.fileData;
+                a.download = previewData.fileName || `${fileName.replace(/\s+/g, '_')}`;
+                a.click();
+                return;
+            }
+
+            if (previewData && previewData.id) {
+                // Generate simple download summary
+                let content = `EXAMNEXUS - PREVIEW DOWNLOAD\n==============================\n\nTitle: ${fileName}\nType: ${type.toUpperCase()}\n\n`;
+                if (previewData.questions) {
+                    content += "QUESTIONS:\n";
+                    previewData.questions.forEach((q, i) => content += `${i+1}. ${q}\n`);
+                } else if (previewData.topics) {
+                    content += "TOPICS:\n";
+                    previewData.topics.forEach((t, i) => content += `- ${t}\n`);
+                }
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${fileName.replace(/\s+/g, '_')}_Preview.txt`;
+                a.click();
+            } else {
+                alert('Download started for ' + fileName);
+            }
+        });
+    </script>
+</body>
+</html>

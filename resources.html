@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Access comprehensive notes and complete lab files for BCA, BBA, B.Com, and B.Tech — organized by semester and subject.">
+    <meta name="keywords" content="University Notes, Lab Files, Study Materials, BCA Notes, BBA Notes, B.Com Notes, B.Tech Notes">
+    <title>Notes & Lab Files | ExamNexus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <span class="loader-text">ExamNexus</span>
+        </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-primary">Exam</span>
+                    <span class="logo-secondary">Nexus</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link" data-page="index"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="branches.html" class="nav-link" data-page="branches"><i class="fas fa-code-branch"></i> Branches</a></li>
+                <li><a href="pyqs.html" class="nav-link" data-page="pyqs"><i class="fas fa-file-alt"></i> PYQs</a></li>
+                <li><a href="resources.html" class="nav-link active" data-page="resources"><i class="fas fa-book"></i> Resources</a></li>
+                <li><a href="about.html" class="nav-link" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="search-btn" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div id="navAuthArea"></div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search PYQs, Notes, Lab Files..." autocomplete="off">
+                <button class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="page-header-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="page-header-content">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Notes & Lab Files</span>
+                </div>
+                <h1 class="page-title">Notes & <span class="gradient-text">Lab Files</span></h1>
+                <p class="page-subtitle">Access comprehensive notes and complete lab files for all branches — organized by semester and subject.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESOURCES SECTION ===== -->
+    <section class="resources-section" id="resources">
+        <div class="container">
+            <!-- Resource Type Tabs -->
+            <div class="resource-tabs">
+                <button class="tab-btn active" data-tab="notes" id="tabNotes">
+                    <i class="fas fa-sticky-note"></i> Notes
+                </button>
+                <button class="tab-btn" data-tab="labfiles" id="tabLabFiles">
+                    <i class="fas fa-flask"></i> Lab Files
+                </button>
+            </div>
+
+            <!-- Resource Filter -->
+            <div class="resource-filter">
+                <select id="resourceBranchFilter" class="filter-select">
+                    <option value="all">All Branches</option>
+                    <option value="btechcse">B.Tech CSE</option>
+                    <option value="bca">BCA</option>
+                    <option value="bcom">B.Com</option>
+                    <option value="mba">MBA</option>
+                    <option value="btechece">B.Tech ECE</option>
+                    <option value="bba">BBA</option>
+                </select>
+                <select id="resourceSemesterFilter" class="filter-select">
+                    <option value="all">All Semesters</option>
+                </select>
+            </div>
+
+            <!-- Resources Grid -->
+            <div class="resources-grid" id="resourcesGrid">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-primary">Exam</span>
+                            <span class="logo-secondary">Nexus</span>
+                        </div>
+                    </a>
+                    <p>Your ultimate academic companion for PYQs, Notes, and Lab Files. Access free study resources across all branches and semesters.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="branches.html">Branches</a></li>
+                        <li><a href="pyqs.html">PYQs</a></li>
+                        <li><a href="resources.html">Notes & Lab Files</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Branches</h4>
+                    <ul>
+                        <li><a href="pyqs.html?branch=btechcse">B.Tech CSE</a></li>
+                        <li><a href="pyqs.html?branch=bca">BCA</a></li>
+                        <li><a href="pyqs.html?branch=bcom">B.Com</a></li>
+                        <li><a href="pyqs.html?branch=mba">MBA</a></li>
+                        <li><a href="pyqs.html?branch=btechece">B.Tech ECE</a></li>
+                        <li><a href="pyqs.html?branch=bba">BBA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html#faq">FAQ</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ExamNexus. All rights reserved.</p>
+                <p>Made with <i class="fas fa-heart" style="color: #F43F5E;"></i> for Students</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
+
+
+
+
+
